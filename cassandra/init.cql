@@ -4,7 +4,7 @@ USE test;
 
 CREATE TABLE counters
 (
-    id         int,
+    id         text,
     count      counter,
     PRIMARY KEY (id)
 );

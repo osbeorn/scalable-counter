@@ -1,0 +1,1 @@
+docker-compose up -d --scale scalable-counter=2 --no-recreate

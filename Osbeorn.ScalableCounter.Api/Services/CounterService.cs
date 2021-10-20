@@ -1,9 +1,13 @@
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Net;
+using System.Net.Sockets;
 using System.Threading.Tasks;
 using Cassandra;
 using Microsoft.Extensions.Configuration;
 using Cassandra.Mapping;
+using Microsoft.Extensions.Logging;
+using Osbeorn.ScalableCounter.Api.Controllers;
 using Osbeorn.ScalableCounter.Db;
 using Osbeorn.ScalableCounter.Domain;
 
@@ -11,11 +15,13 @@ namespace Osbeorn.ScalableCounter.Api.Services
 {
     public class CounterService
     {
+        private readonly ILogger<CountersController> _logger;
         private readonly IConfiguration _configuration;
         private readonly CassandraDbContext _dbContext;
 
-        public CounterService(IConfiguration configuration, CassandraDbContext dbContext)
+        public CounterService(ILogger<CountersController> logger, IConfiguration configuration, CassandraDbContext dbContext)
         {
+            _logger = logger;
             _configuration = configuration;
             _dbContext = dbContext;
         }
@@ -24,8 +30,18 @@ namespace Osbeorn.ScalableCounter.Api.Services
         {
             var session = _dbContext.GetSession();
             var mapper = new Mapper(session);
+
+            string realIp = "127.0.0.1"; // fallback
+            var host = Dns.GetHostEntry(Dns.GetHostName());
+            foreach (var ip in host.AddressList)
+            {
+                if (ip.AddressFamily == AddressFamily.InterNetwork)
+                {
+                    realIp = ip.ToString();
+                }
+            }
             
-            await mapper.ExecuteAsync("UPDATE counters SET count = count + 1 WHERE id = 1");
+            await mapper.ExecuteAsync($"UPDATE counters SET count = count + 1 WHERE id = '{realIp}'");
             
             return await mapper.FetchAsync<Counter>("SELECT * FROM counters");
         }

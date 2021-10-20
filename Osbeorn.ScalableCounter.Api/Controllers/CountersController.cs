@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Sockets;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -25,12 +27,14 @@ namespace Osbeorn.ScalableCounter.Api.Controllers
         [HttpGet]
         public async Task<IEnumerable<Counter>> GetAll()
         {
-            _logger.LogInformation("Received 'GetAll' request on host {}.", Request.Headers["host"]);
-            _logger.LogInformation("Received headers:");
-            foreach (var header in Request.Headers)
-            {
-                _logger.LogInformation("key={}, value={}", header.Key, header.Value);
-            }
+            _logger.LogInformation("Received 'GetAll' request");
+            // _logger.LogInformation("Received headers:");
+            // foreach (var header in Request.Headers)
+            // {
+            //     _logger.LogInformation("key={}, value={}", header.Key, header.Value);
+            // }
+            
+            // _logger.LogInformation("Network/machine name: {}", System.Environment.MachineName);       
 
             return await _counterService.GetAll();
         }
