@@ -11,6 +11,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Osbeorn.ScalableCounter.Api.Services;
+using Osbeorn.ScalableCounter.Db;
 
 namespace Osbeorn.ScalableCounter.Api
 {
@@ -31,6 +33,8 @@ namespace Osbeorn.ScalableCounter.Api
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Osbeorn.ScalableCounter.Api", Version = "v1" });
             });
+            services.AddScoped<CounterService>();
+            services.AddSingleton<CassandraDbContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -6,7 +6,12 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="CassandraCSharpDriver" Version="3.16.3" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Osbeorn.ScalableCounter.Db\Osbeorn.ScalableCounter.Db.csproj" />
     </ItemGroup>
 
 </Project>

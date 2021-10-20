@@ -1,35 +1,69 @@
 version: '2'
 services:
+  traefik:
+    image: traefik:2.5
+    container_name: "traefik"
+    ports:
+      - "8080:8080"
+      - "80:80"
+    command: >
+      --api.insecure=true
+      --providers.docker
+      --providers.docker.watch
+      --providers.docker.exposedbydefault=false
+      --entrypoints.http.address=:80
+      --metrics.prometheus --log.level=DEBUG --accesslog
+    labels:
+      - "traefik.port=8080"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    restart: always
+  scalable-counter:
+    image: osbeorn/scalable-counter:1.0
+    build:
+      context: .
+      dockerfile: Osbeorn.ScalableCounter.Api/Dockerfile
+    environment:
+      - AppConfiguration__Cassandra__ContactPoint=scalable-counter-cassandra-1
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.scalable-counter.rule=PathPrefix(`/scalable-counter/v1`)"
+      - "traefik.http.middlewares.scalable-counter-stripprefix.stripprefix.prefixes=/scalable-counter/v1"
+      - "traefik.http.middlewares.scalable-counter-stripprefix.stripprefix.forceSlash=false"
+      - "traefik.http.routers.scalable-counter.middlewares=scalable-counter-stripprefix@docker"
   cassandra:
     image: docker.io/bitnami/cassandra:4.0
     ports:
-      - 7000:7000
-      - 9042:9042
+      - "7000:7000"
+      - "9042:9042"
     volumes:
       - cassandra_data:/bitnami
+      - ./cassandra:/docker-entrypoint-initdb.d
     environment:
+      - BITNAMI_DEBUG=true
       - CASSANDRA_SEEDS=cassandra,cassandra2
       - CASSANDRA_CLUSTER_NAME=cassandra-cluster
       - CASSANDRA_PASSWORD_SEEDER=yes
       - CASSANDRA_PASSWORD=cassandra
       # By default, Cassandra autodetects the available host memory and takes as much as it can.
       # Therefore, memory options are mandatory if multiple Cassandras are launched in the same node.
-      - MAX_HEAP_SIZE=2G
+      - MAX_HEAP_SIZE=1G
       - HEAP_NEWSIZE=200M
   cassandra2:
     image: docker.io/bitnami/cassandra:4.0
     ports:
-      - 7001:7000
-      - 9043:9042
+      - "7001:7000"
+      - "9043:9042"
     volumes:
       - cassandra2_data:/bitnami
     environment:
+      - BITNAMI_DEBUG=true
       - CASSANDRA_SEEDS=cassandra,cassandra2
       - CASSANDRA_CLUSTER_NAME=cassandra-cluster
       - CASSANDRA_PASSWORD=cassandra
       # By default, Cassandra autodetects the available host memory and takes as much as it can.
       # Therefore, memory options are mandatory if multiple Cassandras are launched in the same node.
-      - MAX_HEAP_SIZE=2G
+      - MAX_HEAP_SIZE=1G
       - HEAP_NEWSIZE=200M
 
 volumes:
