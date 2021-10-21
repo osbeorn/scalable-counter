@@ -6,6 +6,6 @@ namespace Osbeorn.ScalableCounter.Api.Services
 {
     public interface ICounterService
     {
-        public Task<IEnumerable<Counter>> GetAll();
+        public Task<IEnumerable<Counter>> GetAllAsync();
     }
 }

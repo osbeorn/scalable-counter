@@ -3,7 +3,6 @@ using System.Diagnostics;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading.Tasks;
-using Cassandra;
 using Microsoft.Extensions.Configuration;
 using Cassandra.Mapping;
 using Microsoft.Extensions.Logging;
@@ -26,13 +25,13 @@ namespace Osbeorn.ScalableCounter.Api.Services
             _dbContext = dbContext;
         }
 
-        public async Task<IEnumerable<Counter>> GetAll()
+        public async Task<IEnumerable<Counter>> GetAllAsync()
         {
             var session = _dbContext.GetSession();
             var mapper = new Mapper(session);
 
-            string realIp = "127.0.0.1"; // fallback
-            var host = Dns.GetHostEntry(Dns.GetHostName());
+            var realIp = "127.0.0.1"; // fallback
+            var host = await Dns.GetHostEntryAsync(Dns.GetHostName());
             foreach (var ip in host.AddressList)
             {
                 if (ip.AddressFamily == AddressFamily.InterNetwork)
@@ -45,7 +44,7 @@ namespace Osbeorn.ScalableCounter.Api.Services
             
             await mapper.ExecuteAsync($"UPDATE counters SET count = count + 1 WHERE id = '{realIp}'");
             
-            _logger.LogInformation($"Retrieving all counters");
+            _logger.LogInformation("Retrieving all counters");
             
             return await mapper.FetchAsync<Counter>("SELECT * FROM counters");
         }

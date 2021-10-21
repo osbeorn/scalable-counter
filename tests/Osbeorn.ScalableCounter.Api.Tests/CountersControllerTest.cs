@@ -4,7 +4,6 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 using Osbeorn.ScalableCounter.Api.Controllers;
 using Osbeorn.ScalableCounter.Api.Services;
-using Osbeorn.ScalableCounter.Domain;
 using Xunit;
 
 namespace Osbeorn.ScalableCounter.Api.Tests

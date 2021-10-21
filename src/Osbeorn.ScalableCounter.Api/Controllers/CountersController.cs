@@ -29,7 +29,7 @@ namespace Osbeorn.ScalableCounter.Api.Controllers
         {
             _logger.LogInformation("Received 'GetAll' request");
 
-            return await _counterService.GetAll();
+            return await _counterService.GetAllAsync();
         }
     }
 }

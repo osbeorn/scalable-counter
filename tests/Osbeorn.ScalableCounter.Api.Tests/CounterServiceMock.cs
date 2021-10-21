@@ -8,9 +8,9 @@ namespace Osbeorn.ScalableCounter.Api.Tests
 {
     public class CounterServiceMock : ICounterService
     {
-        public Task<IEnumerable<Counter>> GetAll()
+        public Task<IEnumerable<Counter>> GetAllAsync()
         {
-            var counters = new List<Counter>()
+            var counters = new List<Counter>
             {
                 new()
                 {
