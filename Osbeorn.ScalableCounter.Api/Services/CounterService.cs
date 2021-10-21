@@ -41,7 +41,11 @@ namespace Osbeorn.ScalableCounter.Api.Services
                 }
             }
             
+            _logger.LogInformation($"Increasing counter for id={realIp}");
+            
             await mapper.ExecuteAsync($"UPDATE counters SET count = count + 1 WHERE id = '{realIp}'");
+            
+            _logger.LogInformation($"Retrieving all counters");
             
             return await mapper.FetchAsync<Counter>("SELECT * FROM counters");
         }

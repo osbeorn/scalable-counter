@@ -28,13 +28,6 @@ namespace Osbeorn.ScalableCounter.Api.Controllers
         public async Task<IEnumerable<Counter>> GetAll()
         {
             _logger.LogInformation("Received 'GetAll' request");
-            // _logger.LogInformation("Received headers:");
-            // foreach (var header in Request.Headers)
-            // {
-            //     _logger.LogInformation("key={}, value={}", header.Key, header.Value);
-            // }
-            
-            // _logger.LogInformation("Network/machine name: {}", System.Environment.MachineName);       
 
             return await _counterService.GetAll();
         }

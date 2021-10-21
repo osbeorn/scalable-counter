@@ -12,12 +12,12 @@ namespace Osbeorn.ScalableCounter.Api.Tests
         {
             var counters = new List<Counter>()
             {
-                new Counter()
+                new()
                 {
                     Id = "1",
                     Count = 5
                 },
-                new Counter()
+                new()
                 {
                     Id = "2",
                     Count = 3

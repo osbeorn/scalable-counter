@@ -12,13 +12,11 @@ namespace Osbeorn.ScalableCounter.Api.Tests
     public class CountersControllerTest
     {
         private readonly ILogger<CountersController> _logger = NullLogger<CountersController>.Instance;
-        private readonly ICounterService _counterService;
+        private readonly ICounterService _counterService = new CounterServiceMock();
         private readonly CountersController _controller;
         
-        public CountersControllerTest(
-            )
+        public CountersControllerTest()
         {
-            _counterService = new CounterServiceMock();
             _controller = new CountersController(_logger, _counterService);
         }
 
