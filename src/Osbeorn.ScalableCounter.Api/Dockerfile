@@ -4,7 +4,7 @@ EXPOSE 80
 
 FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 WORKDIR /src
-COPY . .
+COPY /src .
 RUN dotnet restore "Osbeorn.ScalableCounter.Api/Osbeorn.ScalableCounter.Api.csproj"
 COPY . .
 WORKDIR "/src/Osbeorn.ScalableCounter.Api"

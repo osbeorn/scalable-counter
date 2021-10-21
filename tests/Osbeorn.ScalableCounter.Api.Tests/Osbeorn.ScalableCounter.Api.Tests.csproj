@@ -20,7 +20,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Osbeorn.ScalableCounter.Api\Osbeorn.ScalableCounter.Api.csproj" />
+      <ProjectReference Include="..\..\src\Osbeorn.ScalableCounter.Api\Osbeorn.ScalableCounter.Api.csproj" />
     </ItemGroup>
 
 </Project>

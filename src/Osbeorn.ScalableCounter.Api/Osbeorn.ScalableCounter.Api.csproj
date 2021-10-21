@@ -12,6 +12,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Osbeorn.ScalableCounter.Db\Osbeorn.ScalableCounter.Db.csproj" />
+      <ProjectReference Include="..\Osbeorn.ScalableCounter.Domain\Osbeorn.ScalableCounter.Domain.csproj" />
     </ItemGroup>
 
 </Project>

@@ -21,7 +21,7 @@ services:
     image: osbeorn/scalable-counter:1.0
     build:
       context: .
-      dockerfile: Osbeorn.ScalableCounter.Api/Dockerfile
+      dockerfile: src/Osbeorn.ScalableCounter.Api/Dockerfile
     environment:
       - AppConfiguration__Cassandra__ContactPoint=cassandra
     labels:
