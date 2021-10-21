@@ -13,7 +13,7 @@ using Osbeorn.ScalableCounter.Domain;
 
 namespace Osbeorn.ScalableCounter.Api.Services
 {
-    public class CounterService
+    public class CounterService : ICounterService
     {
         private readonly ILogger<CountersController> _logger;
         private readonly IConfiguration _configuration;

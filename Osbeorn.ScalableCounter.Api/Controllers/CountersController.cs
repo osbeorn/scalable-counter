@@ -16,9 +16,9 @@ namespace Osbeorn.ScalableCounter.Api.Controllers
     public class CountersController : ControllerBase
     {
         private readonly ILogger<CountersController> _logger;
-        private readonly CounterService _counterService;
+        private readonly ICounterService _counterService;
 
-        public CountersController(ILogger<CountersController> logger, CounterService counterService)
+        public CountersController(ILogger<CountersController> logger, ICounterService counterService)
         {
             _logger = logger;
             _counterService = counterService;

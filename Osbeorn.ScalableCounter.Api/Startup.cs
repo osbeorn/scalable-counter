@@ -33,7 +33,7 @@ namespace Osbeorn.ScalableCounter.Api
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Osbeorn.ScalableCounter.Api", Version = "v1" });
             });
-            services.AddScoped<CounterService>();
+            services.AddScoped<ICounterService, CounterService>();
             services.AddSingleton<CassandraDbContext>();
         }
 

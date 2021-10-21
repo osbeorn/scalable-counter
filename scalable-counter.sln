@@ -6,6 +6,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Osbeorn.ScalableCounter.Db"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Osbeorn.ScalableCounter.Domain", "Osbeorn.ScalableCounter.Domain\Osbeorn.ScalableCounter.Domain.csproj", "{212E7AA0-916A-40C1-9891-CE079C2952F2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Osbeorn.ScalableCounter.Api.Tests", "Osbeorn.ScalableCounter.Api.Tests\Osbeorn.ScalableCounter.Api.Tests.csproj", "{5F234BFA-6666-4439-A159-B554675A1620}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{212E7AA0-916A-40C1-9891-CE079C2952F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{212E7AA0-916A-40C1-9891-CE079C2952F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{212E7AA0-916A-40C1-9891-CE079C2952F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F234BFA-6666-4439-A159-B554675A1620}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F234BFA-6666-4439-A159-B554675A1620}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F234BFA-6666-4439-A159-B554675A1620}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F234BFA-6666-4439-A159-B554675A1620}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
