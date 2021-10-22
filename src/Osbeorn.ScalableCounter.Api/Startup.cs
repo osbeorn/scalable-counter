@@ -34,7 +34,7 @@ namespace Osbeorn.ScalableCounter.Api
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Osbeorn.ScalableCounter.Api", Version = "v1" });
             });
             services.AddScoped<ICounterService, CounterService>();
-            services.AddSingleton<CassandraDbContext>();
+            services.AddSingleton<ICassandraDbContext, CassandraDbContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

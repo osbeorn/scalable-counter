@@ -8,21 +8,21 @@ using Xunit;
 
 namespace Osbeorn.ScalableCounter.Api.Tests
 {
-    public class CountersControllerTest
+    public class CountersControllerUnitTest
     {
         private readonly ILogger<CountersController> _logger = NullLogger<CountersController>.Instance;
         private readonly ICounterService _counterService = new CounterServiceMock();
         private readonly CountersController _controller;
         
-        public CountersControllerTest()
+        public CountersControllerUnitTest()
         {
             _controller = new CountersController(_logger, _counterService);
         }
 
         [Fact]
-        public void GetAllReturnsCounters()
+        public void IncrementAndGetAllReturnsCounters()
         {
-            var resultTask = _controller.GetAll();
+            var resultTask = _controller.IncrementAndGetAll();
 
             var result = resultTask.Result;
             

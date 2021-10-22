@@ -25,11 +25,11 @@ namespace Osbeorn.ScalableCounter.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<Counter>> GetAll()
+        public async Task<IEnumerable<Counter>> IncrementAndGetAll()
         {
-            _logger.LogInformation("Received 'GetAll' request");
+            _logger.LogInformation("Received 'IncrementAndGetAll' request");
 
-            return await _counterService.GetAllAsync();
+            return await _counterService.IncrementAndGetAllAsync();
         }
     }
 }

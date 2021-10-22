@@ -1,9 +1,10 @@
+using System.Threading.Tasks;
 using Cassandra;
 using Microsoft.Extensions.Configuration;
 
 namespace Osbeorn.ScalableCounter.Db
 {
-    public class CassandraDbContext
+    public class CassandraDbContext : ICassandraDbContext
     {
         private readonly IConfiguration _configuration;
         private readonly Cluster _cluster;
@@ -25,9 +26,15 @@ namespace Osbeorn.ScalableCounter.Db
             _session = _cluster.Connect();
         }
 
-        public ISession GetSession()
+        public Task<ISession> GetSession()
         {
-            return _session;
+            return Task.FromResult(_session);
+        }
+
+        public void Dispose()
+        {
+            _cluster?.Dispose();
+            _session?.Dispose();
         }
     }
 }

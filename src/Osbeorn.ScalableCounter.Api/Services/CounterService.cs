@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net;
@@ -15,31 +16,37 @@ namespace Osbeorn.ScalableCounter.Api.Services
     public class CounterService : ICounterService
     {
         private readonly ILogger<CountersController> _logger;
-        private readonly IConfiguration _configuration;
-        private readonly CassandraDbContext _dbContext;
+        private readonly ICassandraDbContext _dbContext;
 
-        public CounterService(ILogger<CountersController> logger, IConfiguration configuration, CassandraDbContext dbContext)
+        public CounterService(ILogger<CountersController> logger, ICassandraDbContext dbContext)
         {
             _logger = logger;
-            _configuration = configuration;
             _dbContext = dbContext;
         }
 
-        public async Task<IEnumerable<Counter>> GetAllAsync()
+        public async Task<IEnumerable<Counter>> IncrementAndGetAllAsync()
         {
-            var session = _dbContext.GetSession();
+            var session = await _dbContext.GetSession();
             var mapper = new Mapper(session);
 
             var realIp = "127.0.0.1"; // fallback
-            var host = await Dns.GetHostEntryAsync(Dns.GetHostName());
-            foreach (var ip in host.AddressList)
+            try
             {
-                if (ip.AddressFamily == AddressFamily.InterNetwork)
+                var host = await Dns.GetHostEntryAsync(Dns.GetHostName());
+                foreach (var ip in host.AddressList)
                 {
-                    realIp = ip.ToString();
+                    if (ip.AddressFamily == AddressFamily.InterNetwork)
+                    {
+                        realIp = ip.ToString();
+                    }
                 }
             }
-            
+            catch (Exception e)
+            {
+                // should only occur in tests but log anyway
+                _logger.LogWarning("Failed to retrieve host IP address. Using fallback IP 127.0.0.1.");
+            }
+
             _logger.LogInformation($"Increasing counter for id={realIp}");
             
             await mapper.ExecuteAsync($"UPDATE counters SET count = count + 1 WHERE id = '{realIp}'");

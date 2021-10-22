@@ -8,18 +8,18 @@ namespace Osbeorn.ScalableCounter.Api.Tests
 {
     public class CounterServiceMock : ICounterService
     {
-        public Task<IEnumerable<Counter>> GetAllAsync()
+        public Task<IEnumerable<Counter>> IncrementAndGetAllAsync()
         {
             var counters = new List<Counter>
             {
                 new()
                 {
-                    Id = "1",
+                    Id = "192.168.1.132",
                     Count = 5
                 },
                 new()
                 {
-                    Id = "2",
+                    Id = "192.168.1.144",
                     Count = 3
                 }
             };
