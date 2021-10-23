@@ -6,7 +6,7 @@ using Osbeorn.ScalableCounter.Api.Controllers;
 using Osbeorn.ScalableCounter.Api.Services;
 using Xunit;
 
-namespace Osbeorn.ScalableCounter.Api.Tests
+namespace Osbeorn.ScalableCounter.Api.Tests.Unit
 {
     public class CountersControllerUnitTest
     {

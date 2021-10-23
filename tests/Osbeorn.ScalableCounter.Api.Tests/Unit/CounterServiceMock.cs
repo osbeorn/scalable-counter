@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Osbeorn.ScalableCounter.Api.Services;
 using Osbeorn.ScalableCounter.Domain;
 
-namespace Osbeorn.ScalableCounter.Api.Tests
+namespace Osbeorn.ScalableCounter.Api.Tests.Unit
 {
     public class CounterServiceMock : ICounterService
     {

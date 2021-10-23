@@ -7,7 +7,7 @@ using Osbeorn.ScalableCounter.Api.Services;
 using Osbeorn.ScalableCounter.Db;
 using Xunit;
 
-namespace Osbeorn.ScalableCounter.Api.Tests
+namespace Osbeorn.ScalableCounter.Api.Tests.Integration
 {
     public class CountersControllerIntegrationTest : IDisposable
     {

@@ -41,7 +41,7 @@ namespace Osbeorn.ScalableCounter.Api.Services
                     }
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 // should only occur in tests but log anyway
                 _logger.LogWarning("Failed to retrieve host IP address. Using fallback IP 127.0.0.1.");

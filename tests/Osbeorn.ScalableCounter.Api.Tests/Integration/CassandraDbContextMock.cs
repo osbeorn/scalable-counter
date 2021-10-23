@@ -5,16 +5,17 @@ using DotNet.Testcontainers.Containers;
 using DotNet.Testcontainers.Containers.Builders;
 using DotNet.Testcontainers.Containers.Modules;
 using DotNet.Testcontainers.Containers.WaitStrategies;
+using Osbeorn.ScalableCounter.Api.Tests.Integration;
 using Osbeorn.ScalableCounter.Db;
 using Serilog;
 
-namespace Osbeorn.ScalableCounter.Api.Tests
+namespace Osbeorn.ScalableCounter.Api.Tests.Integration
 {
     public class CassandraDbContextMock : ICassandraDbContext
     {
-        private readonly string CASSANDRA_USER = "cassandra";
-        private readonly string CASSANDRA_PASSWORD = "cassandra";
-        private readonly string CASSANDRA_KEYSPACE = "test";
+        private const string CASSANDRA_USER = "cassandra";
+        private const string CASSANDRA_PASSWORD = "cassandra";
+        private const string CASSANDRA_KEYSPACE = "test";
         
         private IDockerContainer _testcontainer;
         private Cluster _cluster;
